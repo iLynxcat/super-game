@@ -62,3 +62,13 @@ class GameEngine {
         objects.append(object)
     }
 }
+
+extension GameEngine {
+    func findObject<T: GameObject>(firstOfType type: T.Type) -> T? {
+        objects.first { $0 is T } as? T
+    }
+
+    func findObjects<T: GameObject>(ofType type: T.Type) -> [T] {
+        objects.compactMap { $0 as? T }
+    }
+}
