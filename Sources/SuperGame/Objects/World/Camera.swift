@@ -3,12 +3,12 @@ import Raylib
 
 class Camera: GameObject3D {
     var camera: Camera3D
-    var position = Vector3(x: 0, y: 25, z: 0) {
+    var position: Vector3 {
         didSet {
             camera.position = position
         }
     }
-    var target: any GameObject3D {
+    var target: PlayerFirstPerson {
         didSet {
             camera.target = target.position
         }
@@ -27,11 +27,13 @@ class Camera: GameObject3D {
     private(set) var yaw: Float = -Float.pi / 2
     let mouseSensitivity: Float = 0.001
 
-    init(target: GameObject3D) {
+    init(target: PlayerFirstPerson) {
         self.target = target
+        self.position = target.eyePosition
         self.camera = Camera3D(
             position: position,
-            target: Vector3(x: 0, y: 25, z: -1),
+            target: Vector3(
+                x: target.eyePosition.x, y: target.eyePosition.y, z: target.eyePosition.z - 1),
             up: up,
             fovy: fov,
             projection: projection.asInt32
@@ -39,7 +41,7 @@ class Camera: GameObject3D {
     }
 
     func update(deltaTime: Float) {
-        position = target.position
+        position = target.eyePosition
 
         let mouseDelta = GetMouseDelta()
         yaw += mouseDelta.x * mouseSensitivity
@@ -85,7 +87,7 @@ class Camera: GameObject3D {
     }
 
     func draw() {
-        DrawGrid(20, 10.0)
+        DrawPlane(.init(x: 0, y: 0, z: 0), .init(x: 256, y: 256), .darkGray)
     }
 
     func postDraw() {

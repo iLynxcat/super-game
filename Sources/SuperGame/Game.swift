@@ -46,7 +46,7 @@ class Game: GameDelegate {
 
     func willDraw() {
         if hasCollision {
-            ClearBackground(.darkGray)
+            ClearBackground(.purple)
         } else {
             ClearBackground(.black)
         }
