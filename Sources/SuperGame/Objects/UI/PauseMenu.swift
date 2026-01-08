@@ -51,7 +51,7 @@ class PauseMenu: GameObject {
         let centerX = screenWidth / 2
         let size: Int32 = 20
         let width = MeasureText(text, size)
-        let color: Color = selected ? .white : .darkGray
+        let color: Color = selected ? .purple : .white
 
         DrawText(text, centerX - width / 2, y, size, color)
     }
