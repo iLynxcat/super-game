@@ -33,6 +33,10 @@ class GameEngine {
         let targetFPS: Int32 = min(GetMonitorRefreshRate(GetCurrentMonitor()), 120)
         SetTargetFPS(targetFPS)
 
+        for object in objects {
+            object.load()
+        }
+
         DisableCursor()
     }
 
