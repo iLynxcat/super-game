@@ -1,6 +1,6 @@
 import Raylib
 
-protocol Collidable: AnyObject {
+protocol Collidable: GameObject {
     var collisionBox: BoundingBox { get }
 }
 
@@ -24,5 +24,11 @@ extension BoundingBox {
                 z: center.z + size.z / 2
             )
         )
+    }
+}
+
+extension GameEngine {
+    func collidables() -> [any Collidable] {
+        objects.compactMap { $0 as? Collidable }
     }
 }

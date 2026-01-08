@@ -14,7 +14,7 @@ class GameEngine {
     var shouldUpdate: Bool = true
     let alwaysUpdateLayers: [RenderLayer] = [.ui]
 
-    private var objects: [any GameObject] = []
+    private(set) var objects: [any GameObject] = []
     private var layeredObjects: [RenderLayer: [any GameObject]] {
         Dictionary(grouping: objects, by: { $0.renderLayer })
     }
