@@ -24,11 +24,6 @@ class PauseMenu: GameObject {
         self.screenHeight = game.engine.windowHeight
     }
 
-    func onWindowResize(width: Int32, height: Int32) {
-        self.screenWidth = width
-        self.screenHeight = height
-    }
-
     func draw() {
         guard shouldRender else { return }
 
@@ -39,6 +34,11 @@ class PauseMenu: GameObject {
         )
 
         drawItem("Paused", 128, selected: false)
+    }
+
+    func onWindowResize(width: Int32, height: Int32) {
+        self.screenWidth = width
+        self.screenHeight = height
     }
 
     func onKeyDown(key: KeyboardKey) {
