@@ -9,6 +9,8 @@ class GameEngine {
         }
     }
 
+    var delegate: (any GameDelegate)?
+
     var shouldUpdate: Bool = true
     let alwaysUpdateLayers: [RenderLayer] = [.ui]
 
@@ -17,10 +19,12 @@ class GameEngine {
         Dictionary(grouping: objects, by: { $0.renderLayer })
     }
 
-    init(width: Int32, height: Int32, title: String) {
+    init(
+        title: String, width: Int32 = 800, height: Int32 = 600
+    ) {
+        self.title = title
         self.windowWidth = width
         self.windowHeight = height
-        self.title = title
     }
 
     func start() {
@@ -37,10 +41,11 @@ class GameEngine {
             object.load()
         }
 
-        DisableCursor()
+        delegate?.didStart()
     }
 
     func stop() {
+        delegate?.willStop()
         CloseWindow()
     }
 
@@ -54,6 +59,8 @@ class GameEngine {
     }
 
     func update() {
+        delegate?.willUpdate()
+
         updateKeyPressed()
         updateWindowSize()
 
@@ -66,11 +73,14 @@ class GameEngine {
                 }
             }
         }
+
+        delegate?.didUpdate()
     }
 
     func draw() {
         BeginDrawing()
-        ClearBackground(.black)
+
+        delegate?.willDraw()
 
         let layers = layeredObjects.keys.sorted()
 
@@ -85,6 +95,8 @@ class GameEngine {
                 object.postDraw()
             }
         }
+
+        delegate?.didDraw()
 
         EndDrawing()
     }

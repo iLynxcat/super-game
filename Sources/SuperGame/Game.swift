@@ -1,4 +1,4 @@
-class Game {
+class Game: GameDelegate {
     let engine: GameEngine
 
     let player: PlayerFirstPerson
@@ -11,10 +11,7 @@ class Game {
     }
 
     init() {
-        self.engine = GameEngine(
-            width: 800, height: 600,
-            title: "Super Game"
-        )
+        self.engine = GameEngine(title: "Super Game")
 
         self.player = PlayerFirstPerson()
         self.camera = Camera(target: player)
@@ -28,7 +25,20 @@ class Game {
         engine.add(PauseMenu(game: self))
     }
 
+    func didStart() {
+        HideCursor()
+    }
+
+    func didUpdate() {
+        // todo: collision checks
+    }
+
+    func willDraw() {
+        ClearBackground(.black)
+    }
+
     func run() {
+        engine.delegate = self
         engine.run()
     }
 }
