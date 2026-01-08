@@ -7,7 +7,7 @@ class PlayerFirstPerson: GameObject3D, Collidable {
 
     var collisionBox: BoundingBox {
         BoundingBox.init(
-            center: position, size: Vector3(x: 12, y: 0, z: 12)
+            center: position, size: Vector3(x: 1.5, y: 2, z: 1.5)
         )
     }
 
