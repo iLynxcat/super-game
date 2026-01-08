@@ -1,9 +1,15 @@
 import Raylib
 
-class PlayerFirstPerson: GameObject3D {
+class PlayerFirstPerson: GameObject3D, Collidable {
     let size: Float = 50.0
     let speed: Float = 100.0  // units per second
     var position = Vector3(x: 0, y: 25, z: 0)
+
+    var collisionBox: BoundingBox {
+        BoundingBox.init(
+            center: position, size: Vector3(x: 12, y: 0, z: 12)
+        )
+    }
 
     weak var camera: Camera?
 
