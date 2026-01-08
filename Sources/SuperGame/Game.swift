@@ -30,7 +30,7 @@ class Game: GameDelegate {
     }
 
     func didStart() {
-        HideCursor()
+        DisableCursor()
     }
 
     func didUpdate() {
