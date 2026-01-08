@@ -1,15 +1,15 @@
 import Raylib
 
 class GameEngine {
-    let windowWidth: Int32
-    let windowHeight: Int32
+    private let windowWidth: Int32
+    private let windowHeight: Int32
     var title: String {
         willSet {
             SetWindowTitle(title)
         }
     }
 
-    private(set) var objects: [any GameObject] = []
+    private var objects: [any GameObject] = []
 
     init(width: Int32, height: Int32, title: String) {
         self.windowWidth = width
