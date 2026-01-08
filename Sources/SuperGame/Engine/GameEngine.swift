@@ -71,4 +71,16 @@ extension GameEngine {
     func findObjects<T: GameObject>(ofType type: T.Type) -> [T] {
         objects.compactMap { $0 as? T }
     }
+
+    func remove(_ object: any GameObject) {
+        objects.removeAll { $0 === object }
+    }
+
+    func removeAll() {
+        objects.removeAll()
+    }
+
+    func removeAll<T: GameObject>(ofType type: T.Type) {
+        objects.removeAll { $0 is T }
+    }
 }
