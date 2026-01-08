@@ -8,16 +8,16 @@ class PlayerCube: GameObject3D {
     func update(deltaTime: Float) {
         let movement = speed * deltaTime
 
-        if IsKeyDown(KEY_W.key) {
+        if IsKeyDown(KEY_W.asInt32) {
             position.z -= movement
         }
-        if IsKeyDown(KEY_S.key) {
+        if IsKeyDown(KEY_S.asInt32) {
             position.z += movement
         }
-        if IsKeyDown(KEY_A.key) {
+        if IsKeyDown(KEY_A.asInt32) {
             position.x -= movement
         }
-        if IsKeyDown(KEY_D.key) {
+        if IsKeyDown(KEY_D.asInt32) {
             position.x += movement
         }
     }
@@ -29,7 +29,7 @@ class PlayerCube: GameObject3D {
 }
 
 extension KeyboardKey {
-    var key: Int32 {
+    var asInt32: Int32 {
         Int32(self.rawValue)
     }
 }

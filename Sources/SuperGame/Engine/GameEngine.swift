@@ -28,7 +28,7 @@ class GameEngine {
         SetWindowState(
             FLAG_WINDOW_RESIZABLE.rawValue
         )
-        SetExitKey(KEY_NULL.key)
+        SetExitKey(KEY_NULL.asInt32)
 
         let targetFPS: Int32 = min(GetMonitorRefreshRate(GetCurrentMonitor()), 120)
         SetTargetFPS(targetFPS)
