@@ -90,6 +90,11 @@ class GameEngine {
             }
             for object in layeredObjects[layer] ?? [] {
                 object.draw()
+                if let collidable = object as? Collidable {
+                    #if DEBUG
+                        DrawBoundingBox(collidable.collisionBox, .purple)
+                    #endif
+                }
             }
             for object in layeredObjects[layer] ?? [] {
                 object.postDraw()
