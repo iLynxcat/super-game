@@ -1,3 +1,5 @@
+import Raylib
+
 class Game: GameDelegate {
     let engine: GameEngine
 
@@ -9,6 +11,8 @@ class Game: GameDelegate {
             engine.shouldUpdate = status == .playing
         }
     }
+
+    private var hasCollision = false
 
     init() {
         self.engine = GameEngine(title: "Super Game")
@@ -30,11 +34,22 @@ class Game: GameDelegate {
     }
 
     func didUpdate() {
-        // todo: collision checks
+        let collidersCollidingWithPlayer = engine.collidables()
+            .filter { $0 !== player && $0.collides(with: player) }
+
+        if collidersCollidingWithPlayer.isEmpty {
+            hasCollision = false
+        } else {
+            hasCollision = true
+        }
     }
 
     func willDraw() {
-        ClearBackground(.black)
+        if hasCollision {
+            ClearBackground(.darkGray)
+        } else {
+            ClearBackground(.black)
+        }
     }
 
     func run() {

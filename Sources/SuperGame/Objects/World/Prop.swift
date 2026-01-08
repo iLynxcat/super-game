@@ -1,7 +1,7 @@
 import Raylib
 
 class Prop: GameObject3D, Collidable {
-    var position = Vector3(x: 0, y: 0, z: 0)
+    var position = Vector3(x: 0, y: 0, z: -50)
 
     var collisionBox: BoundingBox {
         guard let model else {

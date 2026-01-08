@@ -65,7 +65,6 @@ class GameEngine {
         updateWindowSize()
 
         let layers = layeredObjects.keys.sorted()
-
         for layer in layers {
             for object in layeredObjects[layer] ?? [] {
                 if alwaysUpdateLayers.contains(layer) || shouldUpdate {
