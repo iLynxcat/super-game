@@ -9,7 +9,13 @@ class GameEngine {
         }
     }
 
+    var shouldUpdate: Bool = true
+    let alwaysUpdateLayers: [RenderLayer] = [.ui]
+
     private var objects: [any GameObject] = []
+    private var layeredObjects: [RenderLayer: [any GameObject]] {
+        Dictionary(grouping: objects, by: { $0.renderLayer })
+    }
 
     init(width: Int32, height: Int32, title: String) {
         self.windowWidth = width
@@ -23,6 +29,7 @@ class GameEngine {
             FLAG_WINDOW_RESIZABLE.rawValue
         )
         SetTargetFPS(60)
+        SetExitKey(KEY_NULL.key)
     }
 
     func stop() {
@@ -39,8 +46,17 @@ class GameEngine {
     }
 
     func update() {
-        for object in objects {
-            object.update(deltaTime: GetFrameTime())
+        updateKeyPressed()
+        updateWindowSize()
+
+        let layers = layeredObjects.keys.sorted()
+
+        for layer in layers {
+            for object in layeredObjects[layer] ?? [] {
+                if alwaysUpdateLayers.contains(layer) || shouldUpdate {
+                    object.update(deltaTime: GetFrameTime())
+                }
+            }
         }
     }
 
@@ -48,7 +64,6 @@ class GameEngine {
         BeginDrawing()
         ClearBackground(.black)
 
-        let layeredObjects = Dictionary(grouping: objects, by: { $0.renderLayer })
         let layers = layeredObjects.keys.sorted()
 
         for layer in layers {
@@ -73,6 +88,13 @@ class GameEngine {
             for object in objects {
                 object.onWindowResize(width: windowWidth, height: windowHeight)
             }
+        }
+    }
+
+    func updateKeyPressed() {
+        let keyPressed = UInt32(GetKeyPressed())
+        for object in objects {
+            object.onKeyDown(key: KeyboardKey(keyPressed))
         }
     }
 
