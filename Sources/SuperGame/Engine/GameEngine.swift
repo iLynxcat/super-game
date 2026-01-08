@@ -32,6 +32,8 @@ class GameEngine {
 
         let targetFPS: Int32 = min(GetMonitorRefreshRate(GetCurrentMonitor()), 120)
         SetTargetFPS(targetFPS)
+
+        DisableCursor()
     }
 
     func stop() {

@@ -1,7 +1,7 @@
 class Game {
     let engine: GameEngine
 
-    let player: PlayerCube
+    let player: PlayerFirstPerson
     let camera: Camera
 
     var status: GameStatus = .playing {
@@ -16,8 +16,10 @@ class Game {
             title: "Super Game"
         )
 
-        self.player = PlayerCube()
+        self.player = PlayerFirstPerson()
         self.camera = Camera(target: player)
+
+        self.player.camera = camera
 
         engine.add(player)
         engine.add(camera)

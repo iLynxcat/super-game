@@ -15,6 +15,12 @@ class PauseMenu: GameObject {
         }
         set {
             game.status = newValue ? .paused : .playing
+
+            if newValue {
+                EnableCursor()
+            } else {
+                DisableCursor()
+            }
         }
     }
 
