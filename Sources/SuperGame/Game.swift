@@ -1,13 +1,14 @@
-import Raylib
-
 class Game {
-    var engine = GameEngine()
-    var player = PlayerCube()
+    var engine: GameEngine
+
+    var player: PlayerCube
     var camera: Camera
 
     init() {
-        InitWindow(800, 600, "Super Game")
-        SetTargetFPS(60)
+        self.engine = GameEngine(
+            width: 800, height: 600,
+            title: "Super Game"
+        )
 
         self.player = PlayerCube()
         self.camera = Camera(target: player)
@@ -17,11 +18,6 @@ class Game {
     }
 
     func run() {
-        while !WindowShouldClose() {
-            let deltaTime = GetFrameTime()
-            engine.update(deltaTime: deltaTime)
-            engine.draw()
-        }
-        CloseWindow()
+        engine.run()
     }
 }

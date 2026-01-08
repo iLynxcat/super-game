@@ -25,7 +25,6 @@ class Camera: GameObject {
     }
 
     func preDraw() {
-        ClearBackground(.black)
         BeginMode3D(camera)
     }
 
