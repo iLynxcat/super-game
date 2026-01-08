@@ -8,6 +8,8 @@ protocol GameObject: AnyObject {
 
     func preDraw()
     func postDraw()
+
+    func onWindowResize(width: Int32, height: Int32)
 }
 
 extension GameObject {
@@ -15,6 +17,8 @@ extension GameObject {
 
     func preDraw() {}
     func postDraw() {}
+
+    func onWindowResize(width: Int32, height: Int32) {}
 }
 
 protocol Positionable: AnyObject {

@@ -1,8 +1,8 @@
 import Raylib
 
 class GameEngine {
-    private let windowWidth: Int32
-    private let windowHeight: Int32
+    var windowWidth: Int32
+    var windowHeight: Int32
     var title: String {
         didSet {
             SetWindowTitle(title)
@@ -19,6 +19,9 @@ class GameEngine {
 
     func start() {
         InitWindow(windowWidth, windowHeight, title)
+        SetWindowState(
+            FLAG_WINDOW_RESIZABLE.rawValue
+        )
         SetTargetFPS(60)
     }
 
@@ -61,6 +64,16 @@ class GameEngine {
         }
 
         EndDrawing()
+    }
+
+    func updateWindowSize() {
+        if IsWindowResized() {
+            windowWidth = GetScreenWidth()
+            windowHeight = GetScreenHeight()
+            for object in objects {
+                object.onWindowResize(width: windowWidth, height: windowHeight)
+            }
+        }
     }
 
     func add(_ object: any GameObject) {
