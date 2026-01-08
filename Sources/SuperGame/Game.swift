@@ -1,8 +1,8 @@
 class Game {
-    var engine: GameEngine
+    let engine: GameEngine
 
-    var player: PlayerCube
-    var camera: Camera
+    let player: PlayerCube
+    let camera: Camera
 
     init() {
         self.engine = GameEngine(
