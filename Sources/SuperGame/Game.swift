@@ -23,6 +23,7 @@ class Game {
 
         engine.add(player)
         engine.add(camera)
+        engine.add(Prop())
         engine.add(FPSCounter())
         engine.add(PauseMenu(game: self))
     }
