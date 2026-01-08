@@ -1,4 +1,4 @@
-import Raylib
+import Engine
 
 class PlayerFirstPerson: GameObject3D, Collidable {
     let size: Float = 50.0
@@ -49,11 +49,5 @@ class PlayerFirstPerson: GameObject3D, Collidable {
         if IsKeyDown(KEY_SPACE.asInt32) {
             position.y = min(position.y + movement, 512)
         }
-    }
-}
-
-extension KeyboardKey {
-    var asInt32: Int32 {
-        Int32(self.rawValue)
     }
 }

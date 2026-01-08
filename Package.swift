@@ -5,16 +5,18 @@ let package = Package(
     name: "SuperGame",
     platforms: [.macOS(.v26)],
     products: [
-        .executable(name: "SuperGame", targets: ["SuperGame"])
+        .executable(name: "SuperGame", targets: ["Game"]),
+        .library(name: "SuperEngine", targets: ["Engine"]),
     ],
     targets: [
         .systemLibrary(
             name: "Raylib",
             path: "Raylib"
         ),
-        .executableTarget(
-            name: "SuperGame",
+        .target(
+            name: "Engine",
             dependencies: ["Raylib"],
+            path: "Sources/Engine",
             linkerSettings: [
                 .unsafeFlags([
                     "-L", "Submodules/raylib/src",
@@ -25,6 +27,11 @@ let package = Package(
                     "-framework", "OpenGL",
                 ])
             ]
+        ),
+        .executableTarget(
+            name: "Game",
+            dependencies: ["Engine"],
+            path: "Sources/Game"
         ),
     ]
 )

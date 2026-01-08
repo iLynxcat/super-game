@@ -1,4 +1,4 @@
-import Raylib
+import Engine
 
 class Prop: GameObject3D, Collidable {
     var position: Vector3
@@ -30,7 +30,7 @@ class Prop: GameObject3D, Collidable {
     }
 
     func load() {
-        self.model = LoadModel("Sources/SuperGame/Resources/turret.obj")
+        self.model = LoadModel("Sources/Game/Resources/turret.obj")
     }
 
     func draw() {

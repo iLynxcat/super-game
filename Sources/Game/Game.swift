@@ -1,4 +1,4 @@
-import Raylib
+import Engine
 
 class Game: GameDelegate {
     let engine: GameEngine
@@ -17,7 +17,7 @@ class Game: GameDelegate {
     private var hasCollision = false
 
     init() {
-        self.engine = GameEngine(title: "Super Game")
+        self.engine = GameEngine(withTitle: "Super Game")
 
         self.player = PlayerFirstPerson()
         self.camera = Camera(target: player)
@@ -48,7 +48,7 @@ class Game: GameDelegate {
     }
 
     func didUpdate() {
-        let collidersCollidingWithPlayer = engine.collidables()
+        let collidersCollidingWithPlayer = engine.collidables
             .filter { $0 !== player && $0.collides(with: player) }
 
         if collidersCollidingWithPlayer.isEmpty {

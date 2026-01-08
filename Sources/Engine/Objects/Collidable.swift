@@ -1,17 +1,17 @@
 import Raylib
 
-protocol Collidable: GameObject {
+public protocol Collidable: GameObject {
     var collisionBox: BoundingBox { get }
 }
 
 extension Collidable {
-    func collides(with other: any Collidable) -> Bool {
+    public func collides(with other: any Collidable) -> Bool {
         return CheckCollisionBoxes(self.collisionBox, other.collisionBox)
     }
 }
 
 extension BoundingBox {
-    init(center: Vector3, size: Vector3) {
+    public init(center: Vector3, size: Vector3) {
         self.init(
             min: Vector3(
                 x: center.x - size.x / 2,
@@ -28,7 +28,7 @@ extension BoundingBox {
 }
 
 extension GameEngine {
-    func collidables() -> [any Collidable] {
+    public var collidables: [any Collidable] {
         objects.compactMap { $0 as? Collidable }
     }
 }

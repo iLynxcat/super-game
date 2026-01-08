@@ -1,23 +1,23 @@
-import Raylib
+@_exported import Raylib
 
-class GameEngine {
-    var windowWidth: Int32
-    var windowHeight: Int32
-    var title: String {
+public class GameEngine {
+    public private(set) var windowWidth: Int32
+    public private(set) var windowHeight: Int32
+    public var windowTitle: String {
         didSet {
-            SetWindowTitle(title)
+            SetWindowTitle(windowTitle)
         }
     }
 
-    var delegate: (any GameDelegate)?
+    public var delegate: (any GameDelegate)?
 
-    var shouldUpdate = true
-    let alwaysUpdateLayers: [RenderLayer] = [.ui]
+    public var shouldUpdate = true
+    private let alwaysUpdateLayers: [RenderLayer] = [.ui]
 
     #if DEBUG
-        var shouldDrawBoundingBoxes = true
+        public var shouldDrawBoundingBoxes = true
     #else
-        var shouldDrawBoundingBoxes = false
+        public var shouldDrawBoundingBoxes = false
     #endif
 
     private(set) var objects: [any GameObject] = []
@@ -25,16 +25,16 @@ class GameEngine {
         Dictionary(grouping: objects, by: { $0.renderLayer })
     }
 
-    init(
-        title: String, width: Int32 = 800, height: Int32 = 600
+    public init(
+        withTitle title: String, width: Int32 = 800, height: Int32 = 600
     ) {
-        self.title = title
+        self.windowTitle = title
         self.windowWidth = width
         self.windowHeight = height
     }
 
-    func start() {
-        InitWindow(windowWidth, windowHeight, title)
+    internal func start() {
+        InitWindow(windowWidth, windowHeight, windowTitle)
         SetWindowState(
             FLAG_WINDOW_RESIZABLE.rawValue
         )
@@ -50,12 +50,12 @@ class GameEngine {
         delegate?.didStart()
     }
 
-    func stop() {
+    internal func stop() {
         delegate?.willStop()
         CloseWindow()
     }
 
-    func run() {
+    public func run() {
         start()
         while !WindowShouldClose() {
             update()
@@ -64,10 +64,10 @@ class GameEngine {
         stop()
     }
 
-    func update() {
+    internal func update() {
         delegate?.willUpdate()
 
-        updateKeyPressed()
+        updateKeyDown()
         updateWindowSize()
 
         let layers = layeredObjects.keys.sorted()
@@ -82,7 +82,7 @@ class GameEngine {
         delegate?.didUpdate()
     }
 
-    func draw() {
+    internal func draw() {
         BeginDrawing()
 
         delegate?.willDraw()
@@ -109,7 +109,7 @@ class GameEngine {
         EndDrawing()
     }
 
-    func updateWindowSize() {
+    private func updateWindowSize() {
         if IsWindowResized() {
             windowWidth = GetScreenWidth()
             windowHeight = GetScreenHeight()
@@ -119,36 +119,36 @@ class GameEngine {
         }
     }
 
-    func updateKeyPressed() {
+    private func updateKeyDown() {
         let keyPressed = UInt32(GetKeyPressed())
         for object in objects {
             object.onKeyDown(key: KeyboardKey(keyPressed))
         }
     }
 
-    func add(_ object: any GameObject) {
+    public func add(_ object: any GameObject) {
         objects.append(object)
     }
 }
 
 extension GameEngine {
-    func findObject<T: GameObject>(firstOfType type: T.Type) -> T? {
+    public func findObject<T: GameObject>(firstOfType type: T.Type) -> T? {
         objects.first { $0 is T } as? T
     }
 
-    func findObjects<T: GameObject>(ofType type: T.Type) -> [T] {
+    public func findObjects<T: GameObject>(ofType type: T.Type) -> [T] {
         objects.compactMap { $0 as? T }
     }
 
-    func remove(_ object: any GameObject) {
+    public func remove(_ object: any GameObject) {
         objects.removeAll { $0 === object }
     }
 
-    func removeAll() {
+    public func removeAll() {
         objects.removeAll()
     }
 
-    func removeAll<T: GameObject>(ofType type: T.Type) {
+    public func removeAll<T: GameObject>(ofType type: T.Type) {
         objects.removeAll { $0 is T }
     }
 }

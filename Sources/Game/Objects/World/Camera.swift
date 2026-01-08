@@ -1,5 +1,5 @@
+import Engine
 import Foundation
-import Raylib
 
 class Camera: GameObject3D {
     var camera: Camera3D
@@ -25,7 +25,7 @@ class Camera: GameObject3D {
         }
     }
     private(set) var yaw: Float = -Float.pi / 2
-    let mouseSensitivity: Float = 0.001
+    let mouseSensitivity: Float = 0.002
 
     init(target: PlayerFirstPerson) {
         self.target = target
@@ -93,13 +93,4 @@ class Camera: GameObject3D {
     func postDraw() {
         EndMode3D()
     }
-}
-
-extension CameraProjection {
-    var asInt32: Int32 {
-        Int32(self.rawValue)
-    }
-
-    static let orthographic = CAMERA_ORTHOGRAPHIC
-    static let perspective = CAMERA_PERSPECTIVE
 }
