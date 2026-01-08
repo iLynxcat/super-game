@@ -98,13 +98,6 @@ extension CameraProjection {
         Int32(self.rawValue)
     }
 
-    static let free = CAMERA_FREE
-    static let orbital = CAMERA_ORBITAL
     static let orthographic = CAMERA_ORTHOGRAPHIC
     static let perspective = CAMERA_PERSPECTIVE
-
-    static let firstPerson = CAMERA_FIRST_PERSON
-    static let thirdPerson = CAMERA_THIRD_PERSON
-
-    static let custom = CAMERA_CUSTOM
 }
