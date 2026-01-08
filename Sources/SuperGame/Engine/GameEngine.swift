@@ -4,7 +4,7 @@ class GameEngine {
     private let windowWidth: Int32
     private let windowHeight: Int32
     var title: String {
-        willSet {
+        didSet {
             SetWindowTitle(title)
         }
     }
