@@ -45,14 +45,19 @@ class GameEngine {
         BeginDrawing()
         ClearBackground(.black)
 
-        for object in objects {
-            object.preDraw()
-        }
-        for object in objects {
-            object.draw()
-        }
-        for object in objects {
-            object.postDraw()
+        let layeredObjects = Dictionary(grouping: objects, by: { $0.renderLayer })
+        let layers = layeredObjects.keys.sorted()
+
+        for layer in layers {
+            for object in layeredObjects[layer] ?? [] {
+                object.preDraw()
+            }
+            for object in layeredObjects[layer] ?? [] {
+                object.draw()
+            }
+            for object in layeredObjects[layer] ?? [] {
+                object.postDraw()
+            }
         }
 
         EndDrawing()

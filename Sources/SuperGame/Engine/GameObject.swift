@@ -1,6 +1,8 @@
 import Raylib
 
 protocol GameObject: AnyObject {
+    var renderLayer: RenderLayer { get }
+
     func update(deltaTime: Float)
     func draw()
 
@@ -9,6 +11,8 @@ protocol GameObject: AnyObject {
 }
 
 extension GameObject {
+    var renderLayer: RenderLayer { .world3D }
+
     func preDraw() {}
     func postDraw() {}
 }
