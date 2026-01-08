@@ -1,7 +1,7 @@
 import Raylib
 
 class Prop: GameObject3D, Collidable {
-    var position = Vector3(x: 0, y: 0, z: -50)
+    var position: Vector3
 
     var collisionBox: BoundingBox {
         guard let model else {
@@ -25,7 +25,9 @@ class Prop: GameObject3D, Collidable {
     }
     var model: Model?
 
-    internal init() {}
+    init(x: Float, z: Float) {
+        self.position = Vector3(x: x, y: 0, z: z)
+    }
 
     func load() {
         self.model = LoadModel("Sources/SuperGame/Resources/turret.obj")

@@ -24,7 +24,7 @@ class Game: GameDelegate {
 
         engine.add(player)
         engine.add(camera)
-        engine.add(Prop())
+        engine.add(Prop(x: 0, z: -50))
         engine.add(FPSCounter())
         engine.add(PauseMenu(game: self))
     }
