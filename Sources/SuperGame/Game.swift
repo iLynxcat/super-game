@@ -15,6 +15,7 @@ class Game {
 
         engine.add(player)
         engine.add(camera)
+        engine.add(FPSCounter())
     }
 
     func run() {
