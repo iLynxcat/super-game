@@ -6,6 +6,8 @@ class Game: GameDelegate {
     let player: PlayerFirstPerson
     let camera: Camera
 
+    var pauseMenu: PauseMenu?
+
     var status: GameStatus = .playing {
         didSet {
             engine.shouldUpdate = status == .playing
@@ -22,15 +24,24 @@ class Game: GameDelegate {
 
         self.player.camera = camera
 
+        self.pauseMenu = PauseMenu(game: self)
+
         engine.add(player)
         engine.add(camera)
         engine.add(Prop(x: 0, z: -50))
         engine.add(FPSCounter())
-        engine.add(PauseMenu(game: self))
+        guard let pauseMenu = pauseMenu else { fatalError("Pause menu not initialized") }
+        engine.add(pauseMenu)
     }
 
     func didStart() {
         DisableCursor()
+    }
+
+    func willUpdate() {
+        if !IsWindowFocused() {
+            self.pauseMenu?.shouldRender = true
+        }
     }
 
     func didUpdate() {
