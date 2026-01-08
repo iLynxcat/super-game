@@ -1,6 +1,6 @@
 import Raylib
 
-class PlayerCube: GameObject, Positionable {
+class PlayerCube: GameObject3D {
     let size: Float = 50.0
     let speed: Float = 100.0  // units per second
     var position = Vector3(x: 0, y: 25, z: 0)

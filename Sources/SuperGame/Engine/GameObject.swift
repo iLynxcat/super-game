@@ -14,8 +14,6 @@ protocol GameObject: AnyObject {
 }
 
 extension GameObject {
-    var renderLayer: RenderLayer { .world3D }
-
     func update(deltaTime: Float) {}
     func draw() {}
     func preDraw() {}
@@ -25,6 +23,10 @@ extension GameObject {
     func onKeyDown(key: KeyboardKey) {}
 }
 
-protocol Positionable: AnyObject {
+protocol GameObject3D: GameObject {
     var position: Vector3 { get set }
+}
+
+extension GameObject3D {
+    var renderLayer: RenderLayer { .world3D }
 }
