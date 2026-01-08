@@ -39,6 +39,9 @@ class Game: GameDelegate {
     }
 
     func willUpdate() {
+        if GetKeyPressed() == KEY_B.asInt32 {
+            engine.shouldDrawBoundingBoxes.toggle()
+        }
         if !IsWindowFocused() {
             self.pauseMenu?.shouldRender = true
         }
