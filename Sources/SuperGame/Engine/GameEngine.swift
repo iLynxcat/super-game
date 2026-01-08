@@ -11,8 +11,14 @@ class GameEngine {
 
     var delegate: (any GameDelegate)?
 
-    var shouldUpdate: Bool = true
+    var shouldUpdate = true
     let alwaysUpdateLayers: [RenderLayer] = [.ui]
+
+    #if DEBUG
+        var shouldDrawBoundingBoxes = true
+    #else
+        var shouldDrawBoundingBoxes = false
+    #endif
 
     private(set) var objects: [any GameObject] = []
     private var layeredObjects: [RenderLayer: [any GameObject]] {
@@ -89,10 +95,8 @@ class GameEngine {
             }
             for object in layeredObjects[layer] ?? [] {
                 object.draw()
-                if let collidable = object as? Collidable {
-                    #if DEBUG
-                        DrawBoundingBox(collidable.collisionBox, .purple)
-                    #endif
+                if shouldDrawBoundingBoxes, let collidable = object as? Collidable {
+                    DrawBoundingBox(collidable.collisionBox, .purple)
                 }
             }
             for object in layeredObjects[layer] ?? [] {
