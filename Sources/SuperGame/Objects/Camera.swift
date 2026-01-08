@@ -1,15 +1,15 @@
 import Raylib
 
-class Camera: GameObject {
+class Camera: GameObject, Positionable {
     var camera: Camera3D
     var position = Vector3(x: 0, y: 100, z: 150)
-    var target: any GameObject
+    var target: any Positionable
 
     var up = Vector3(x: 0, y: 1, z: 0)
     var fov: Float = 45.0
     var projection: CameraProjection = .perspective
 
-    init(target: GameObject) {
+    init(target: Positionable) {
         self.target = target
         self.camera = Camera3D(
             position: position,

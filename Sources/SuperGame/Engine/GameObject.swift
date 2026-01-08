@@ -1,8 +1,6 @@
 import Raylib
 
 protocol GameObject: AnyObject {
-    var position: Vector3 { get set }
-
     func update(deltaTime: Float)
     func draw()
 
@@ -13,4 +11,8 @@ protocol GameObject: AnyObject {
 extension GameObject {
     func preDraw() {}
     func postDraw() {}
+}
+
+protocol Positionable: AnyObject {
+    var position: Vector3 { get set }
 }
