@@ -25,6 +25,12 @@ extension Vector3: AdditiveArithmetic {
         sqrt((pow(x, 2) + pow(y, 2) + pow(z, 2)))
     }
 
+    public var normalized: Self {
+        let length = self.length
+        guard length > 0 else { return self }
+        return self / length
+    }
+
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
     }

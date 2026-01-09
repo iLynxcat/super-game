@@ -24,9 +24,11 @@ public class Game {
 
     private func start() {
         window.setup()
+        Raylib.DisableCursor()
     }
 
     private func quit() {
+        Raylib.EnableCursor()
         window.close()
     }
 }

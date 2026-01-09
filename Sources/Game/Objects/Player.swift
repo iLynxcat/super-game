@@ -1,17 +1,14 @@
 import Engine
 
-class Player: LivingEntity, Drawable {
+class Player: LivingEntity {
     var layer: Int { DrawLayer.world.rawValue }
 
-    var eyeLocation: Vector3 {
-        location + Vector3(0, 1.8, 0)
-    }
-    var location = Vector3(0, 0, 25)
+    private var mouseSensitivity: Float = 0.01  // rad/px
 
-    public func update(context: UpdateContext) {
+    init() {
+        super.init(at: Vector3(0, 0, -25), eyeHeight: 18)
     }
 
-    public func draw(context: DrawContext) {
-        context.drawPlane(center: .zero, size: Vector2(200, 200), color: .white)
+    override func update(context: UpdateContext) {
     }
 }
