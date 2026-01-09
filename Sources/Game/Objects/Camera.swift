@@ -8,6 +8,6 @@ extension Camera: Drawable {
     }
 
     public func draw(context: DrawContext) {
-        context.drawPlane(center: .zero, size: Vector2(20, 20), color: .white)
+        context.drawPlane(center: .zero, size: Vector2(200, 200), color: .white)
     }
 }
