@@ -1,3 +1,6 @@
 [submodule "Submodules/raylib"]
 	path = Submodules/raylib
 	url = https://github.com/raysan5/raylib.git
+[submodule "SuperGame.old"]
+	path = SuperGame.old
+	url = https://github.com/iLynxcat/super-game.git
