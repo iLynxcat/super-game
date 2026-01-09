@@ -8,7 +8,9 @@ public protocol Updatable: GameObject {
 extension Game {
     internal func update() {
         let context = UpdateContext(
-            deltaTime: Double(Raylib.GetFrameTime()), mouseDelta: Raylib.GetMouseDelta())
+            deltaTime: Double(Raylib.GetFrameTime()),
+            input: Input.capture()
+        )
 
         objects.getAll(ofType: Updatable.self).forEach {
             $0.update(context: context)
