@@ -15,8 +15,8 @@ extension Drawable {
 }
 
 extension Game {
-    internal func draw(deltaTime: TimeInterval) {
-        let drawContext = DrawContext(window: window, deltaTime: deltaTime)
+    internal func draw() {
+        let drawContext = DrawContext(window: window, deltaTime: Double(Raylib.GetFrameTime()))
         let drawables = Dictionary(grouping: objects.getAll(ofType: Drawable.self)) {
             $0.layer
         }

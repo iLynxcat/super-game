@@ -1,6 +1,5 @@
 @_exported import Foundation
-
-import func Raylib.GetFrameTime
+import Raylib
 
 public class Game {
     public let window: GameWindow
@@ -17,9 +16,8 @@ public class Game {
     public func run() {
         start()
         repeat {
-            let deltaTime = Double(Raylib.GetFrameTime())
-            update(deltaTime: deltaTime)
-            draw(deltaTime: deltaTime)
+            update()
+            draw()
         } while !window.shouldClose
         quit()
     }
