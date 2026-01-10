@@ -45,7 +45,17 @@ class Player: LivingEntity {
         }
 
         var speed = moveSpeed
+        if input.isKeyDown(.space) {
+            if !(location.y >= 128) {
+                moveDirection += Vector3(0, 1, 0)
+            }
+        }
         if input.isKeyDown(.shift) {
+            if !(location.y <= 0) {
+                moveDirection -= Vector3(0, 1, 0)
+            }
+        }
+        if input.isKeyDown(.control) {
             speed *= sprintMultiplier
         }
 
