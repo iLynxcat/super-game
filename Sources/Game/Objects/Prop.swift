@@ -5,6 +5,5 @@ public class Prop: ModelEntity {
 
     init(modelPath: String, texturePath: String, at location: Vector3) {
         super.init(path: modelPath, texture: texturePath, at: location, tint: .white)
-        self.scale = 0.3
     }
 }
