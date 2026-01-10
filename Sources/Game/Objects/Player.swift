@@ -17,7 +17,7 @@ class Player: LivingEntity {
     }
 
     private func handleRotation(context: UpdateContext) {
-        yaw -= context.input.mouse.delta.x * mouseSensitivity
+        yaw += context.input.mouse.delta.x * mouseSensitivity
         pitch -= context.input.mouse.delta.y * mouseSensitivity
     }
 
